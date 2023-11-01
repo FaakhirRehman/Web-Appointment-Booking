@@ -8,8 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.UUID;
 
-
-
+@NoArgsConstructor
+@Entity
+@Data
+public class Rating {
+    @Id
+    private String id = UUID.randomUUID().toString();
+    private String appointmentId;
+    private String doctorId;
+    private Integer rating;
+    private String comments;
+}
 
 //mark this class as an 'entity class'
 //Use Data annotation to generate boilerplate code

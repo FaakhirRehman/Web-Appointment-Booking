@@ -6,7 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
+@Repository
+public interface RatingsRepository extends CrudRepository<Rating, String> {
+    List<Rating> findByDoctorId(String doctorId);
+}
 
 
 //mark it as repository

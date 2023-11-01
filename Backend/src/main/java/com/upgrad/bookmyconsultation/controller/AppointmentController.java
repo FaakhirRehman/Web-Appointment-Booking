@@ -5,6 +5,7 @@ import com.upgrad.bookmyconsultation.exception.InvalidInputException;
 import com.upgrad.bookmyconsultation.exception.SlotUnavailableException;
 import com.upgrad.bookmyconsultation.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,30 @@ public class AppointmentController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+
+    @PostMapping
+    public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment) {
+        // Save the appointment details to the database
+        boolean isBooked = appointmentService.bookAppointment(appointment);
+
+        if (isBooked) {
+            return new ResponseEntity<>("Appointment booked successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to book appointment", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{appointmentId}")
+    public ResponseEntity<Appointment> getAppointment(@PathVariable String appointmentId) {
+        Appointment appointment = appointmentService.getAppointmentById(appointmentId);
+
+        if (appointment != null) {
+            return new ResponseEntity<>(appointment, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+}
 
 
 	//create a method post method named bookAppointment with return type ReponseEntity
@@ -39,4 +64,5 @@ public class AppointmentController {
 	
 	
 
-}
+
+

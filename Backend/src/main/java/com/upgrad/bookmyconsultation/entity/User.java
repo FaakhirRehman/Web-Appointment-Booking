@@ -8,7 +8,22 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
+@Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
+    @Id
+    private String emailId;
+    private String firstName;
+    private String lastName;
+    private String dob;
+    private String mobile;
+    private String password;
+    private String createdDate;
+    private String salt;
+}
 
 
 //Mark it with Data, Entity, Builder, NoArgsConstructor, AllArgsConstructor
