@@ -51,13 +51,13 @@ public class DoctorService {
 	// if doctor is found return the doctor
 	// else throw ResourceUnAvailableException
 
-	public void register(Doctor doctor) {
+	public Doctor register(Doctor doctor) {
 		doctor.setId(UUID.randomUUID().toString());
 		if (doctor.getSpeciality() == null) {
 			doctor.setSpeciality(Speciality.GENERAL_PHYSICIAN);
 		}
 
-		doctorRepository.save(doctor);
+		return doctorRepository.save(doctor);
 	}
 
 	public Doctor getDoctor(String doctorId) {
