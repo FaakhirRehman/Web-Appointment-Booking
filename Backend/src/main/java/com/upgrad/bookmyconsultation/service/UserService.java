@@ -41,7 +41,9 @@ public class UserService {
 
 	//create a method named getAllUsers that returns a List of type User
 		//return all the users from the database
-	
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
+	}
 
 	private void encryptPassword(final User newUser) {
 
@@ -50,4 +52,5 @@ public class UserService {
 		newUser.setSalt(encryptedData[0]);
 		newUser.setPassword(encryptedData[1]);
 	}
+
 }
