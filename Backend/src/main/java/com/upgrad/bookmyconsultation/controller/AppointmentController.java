@@ -22,11 +22,11 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 
     @PostMapping
-    public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment) {
+    public ResponseEntity<String> appointment(@RequestBody Appointment appointment) {
         // Save the appointment details to the database
-        boolean isBooked = appointmentService.bookAppointment(appointment);
+        String isBooked = appointmentService.appointment(appointment);
 
-        if (isBooked) {
+        if (String.valueOf(isBooked) != null) {
             return new ResponseEntity<>("Appointment booked successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Failed to book appointment", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -35,7 +35,7 @@ public class AppointmentController {
 
     @GetMapping("/{appointmentId}")
     public ResponseEntity<Appointment> getAppointment(@PathVariable String appointmentId) {
-        Appointment appointment = appointmentService.getAppointmentById(appointmentId);
+        Appointment appointment = appointmentService.getAppointment(appointmentId);
 
         if (appointment != null) {
             return new ResponseEntity<>(appointment, HttpStatus.OK);
