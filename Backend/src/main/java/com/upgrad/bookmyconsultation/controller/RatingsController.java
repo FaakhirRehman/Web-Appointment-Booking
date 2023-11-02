@@ -17,7 +17,7 @@ public class RatingsController {
 
     @PostMapping("/ratings")
     public ResponseEntity<String> submitRatings(@RequestBody Rating rating) {
-        boolean isRatingSubmitted = ratingsService.submitRating(rating);
+        boolean isRatingSubmitted = ratingsService.submitRatings(rating);
 
         if (isRatingSubmitted) {
             return new ResponseEntity<>("Rating submitted successfully", HttpStatus.OK);

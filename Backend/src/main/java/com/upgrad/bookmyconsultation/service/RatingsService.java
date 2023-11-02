@@ -24,7 +24,7 @@ public class RatingsService {
 	@Autowired
 	private DoctorRepository doctorRepository;
 
-	public void submitRatings(Rating rating) {
+	public boolean submitRatings(Rating rating) {
         // Setting a UUID for the rating
         rating.setId(UUID.randomUUID().toString());
 
@@ -49,7 +49,10 @@ public class RatingsService {
 
             // Save the updated doctor object to the database
             doctorRepository.save(doctor);
+
+			return true;
         }
+		return false;
     }
 
 	// Helper method to calculate the new average rating
