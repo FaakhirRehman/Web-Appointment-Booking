@@ -26,6 +26,9 @@ public class AppointmentService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+    private AppointmentRepository appointmentRepository;
+
 
 	//create a method name appointment with the return type of String and parameter of type Appointment
 	//declare exceptions 'SlotUnavailableException' and 'InvalidInputException'
@@ -35,7 +38,29 @@ public class AppointmentService {
 		//save the appointment details to the database
 		//return the appointment id
 	
-	
+	public String appointment(Appointment appointment) throws SlotUnavailableException, InvalidInputException {
+        ValidationUtils.validate(appointment);
+		
+        List<Appointment> existingAppointments = appointmentRepository.
+                findByDoctorIdAndTimeSlotAndAppointmentDate(
+                        appointment.getDoctorId(),
+						appointment.getTimeSlot(),
+                        appointment.getAppointmentDate()
+                        
+                );
+
+        if (!existingAppointments.isEmpty()) {
+            throw new SlotUnavailableException("Slot is already booked.");
+        }
+
+        return appointmentRepository.save(appointment).getId();
+    }
+
+    public Appointment getAppointment(String appointmentId) {
+        return appointmentRepository.findById(appointmentId)
+                .orElseThrow(ResourceUnAvailableException::new);
+    }
+
 
 
 	//create a method getAppointment of type Appointment with a parameter name appointmentId of type String
