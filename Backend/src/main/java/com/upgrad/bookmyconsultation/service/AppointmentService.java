@@ -17,8 +17,6 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AppointmentService {
-
-	
 	
 	//mark it autowired
 	//create an instance of AppointmentRepository called appointmentRepository
@@ -41,19 +39,18 @@ public class AppointmentService {
 	public String appointment(Appointment appointment) throws SlotUnavailableException, InvalidInputException {
         ValidationUtils.validate(appointment);
 		
-        List<Appointment> existingAppointments = appointmentRepository.
+        List<Appointment> existingAppointments = (List<Appointment>) appointmentRepository.
                 findByDoctorIdAndTimeSlotAndAppointmentDate(
                         appointment.getDoctorId(),
 						appointment.getTimeSlot(),
-                        appointment.getAppointmentDate()
-                        
+                        appointment.getAppointmentDate()  
                 );
 
         if (!existingAppointments.isEmpty()) {
             throw new SlotUnavailableException("Slot is already booked.");
         }
 
-        return appointmentRepository.save(appointment).getId();
+        return appointmentRepository.save(appointment).getAppointmentId();
     }
 
     public Appointment getAppointment(String appointmentId) {
