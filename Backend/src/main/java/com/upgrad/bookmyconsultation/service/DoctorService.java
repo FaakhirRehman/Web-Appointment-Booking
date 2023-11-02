@@ -31,30 +31,40 @@ public class DoctorService {
 	@Autowired
 	private AddressRepository addressRepository;
 
-	
-	//create a method register with return type and parameter of typeDoctor
-	//declare InvalidInputException for the method
-		//validate the doctor details
-		//if address is null throw InvalidInputException
-		//set UUID for doctor using UUID.randomUUID.
-		//if speciality is null 
-			//set speciality to Speciality.GENERAL_PHYSICIAN
-		//Create an Address object, initialise it with address details from the doctor object
-		//Save the address object to the database. Store the response.
-		//Set the address in the doctor object with the response
-		//save the doctor object to the database
-		//return the doctor object
-	
-	
-	//create a method name getDoctor that returns object of type Doctor and has a String paramter called id
-		//find the doctor by id
-		//if doctor is found return the doctor
-		//else throw ResourceUnAvailableException
+	// create a method register with return type and parameter of typeDoctor
+	// declare InvalidInputException for the method
+	// validate the doctor details
+	// if address is null throw InvalidInputException
+	// set UUID for doctor using UUID.randomUUID.
+	// if speciality is null
+	// set speciality to Speciality.GENERAL_PHYSICIAN
+	// Create an Address object, initialise it with address details from the doctor
+	// object
+	// Save the address object to the database. Store the response.
+	// Set the address in the doctor object with the response
+	// save the doctor object to the database
+	// return the doctor object
 
-	
+	// create a method name getDoctor that returns object of type Doctor and has a
+	// String paramter called id
+	// find the doctor by id
+	// if doctor is found return the doctor
+	// else throw ResourceUnAvailableException
+
+	public void register(Doctor doctor) {
+		doctor.setId(UUID.randomUUID().toString());
+		if (doctor.getSpeciality() == null) {
+			doctor.setSpeciality(Speciality.GENERAL_PHYSICIAN);
+		}
+
+		doctorRepository.save(doctor);
+	}
+
+	public Doctor getDoctor(String doctorId) {
+        return doctorRepository.findById(doctorId).orElse(null);
+    }
 
 	public List<Doctor> getAllDoctorsWithFilters(String speciality) {
-
 		if (speciality != null && !speciality.isEmpty()) {
 			return doctorRepository.findBySpecialityOrderByRatingDesc(Speciality.valueOf(speciality));
 		}
@@ -77,7 +87,8 @@ public class DoctorService {
 				.stream()
 				.filter(slot -> {
 					return appointmentRepository
-							.findByDoctorIdAndTimeSlotAndAppointmentDate(timeSlot.getDoctorId(), slot, timeSlot.getAvailableDate()) == null;
+							.findByDoctorIdAndTimeSlotAndAppointmentDate(timeSlot.getDoctorId(), slot,
+									timeSlot.getAvailableDate()) == null;
 
 				})
 				.collect(Collectors.toList()));
