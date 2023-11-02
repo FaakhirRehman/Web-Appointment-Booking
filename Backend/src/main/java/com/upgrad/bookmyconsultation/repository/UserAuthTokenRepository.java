@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.validation.constraints.NotNull;
 
 @Repository
-public interface UserAuthTokenRepository extends CrudRepository<UserAuthToken, Long> {
+public interface UserAuthTokenRepository extends CrudRepository<UserAuthToken, String> {
 
 	UserAuthToken findByUserEmailId(@NotNull String userId);
 
