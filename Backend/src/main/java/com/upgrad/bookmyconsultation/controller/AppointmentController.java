@@ -22,7 +22,7 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 
     @PostMapping
-    public ResponseEntity<String> appointment(@RequestBody Appointment appointment) {
+    public ResponseEntity<String> appointment(@RequestBody Appointment appointment) throws SlotUnavailableException, InvalidInputException {
         // Save the appointment details to the database
         String isBooked = appointmentService.appointment(appointment);
 

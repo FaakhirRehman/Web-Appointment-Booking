@@ -27,33 +27,31 @@ public class UserAdminController {
 	@Autowired
 	private AppointmentService appointmentService;
 
-
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<User> getUser(@RequestHeader("authorization") String accessToken,
-	                                    @PathVariable("id") final String userUuid) {
+			@PathVariable("id") final String userUuid) {
 		final User User = userService.getUser(userUuid);
 		return ResponseEntity.ok(User);
 	}
-	
-	//create a post method named createUser with return type as ResponseEntity
-		//define the method parameter user of type User. Set it final. Use @RequestBody for mapping.
-		//declare InvalidInputException using throws keyword
-		
-		//register the user
-	
-		//return http response with status set to OK
-	
-	    @PostMapping("/register")
-    public ResponseEntity<String> createUser(@RequestBody User user) throws InvalidInputException {
-        userService.registerUser(user);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
-    }
 
+	// create a post method named createUser with return type as ResponseEntity
+	// define the method parameter user of type User. Set it final. Use @RequestBody
+	// for mapping.
+	// declare InvalidInputException using throws keyword
+
+	// register the user
+
+	// return http response with status set to OK
+
+	@PostMapping("/register")
+	public ResponseEntity<String> createUser(@RequestBody User user) throws InvalidInputException {
+		userService.register(user);
+		return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+	}
 
 	@GetMapping("/{userId}/appointments")
 	public ResponseEntity<List<Appointment>> getAppointmentForUser(@PathVariable("userId") String userId) {
 		return ResponseEntity.ok(appointmentService.getAppointmentsForUser(userId));
 	}
-
 
 }
