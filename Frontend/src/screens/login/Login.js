@@ -17,6 +17,7 @@ const Login = ({ closeModal }) => {
       fetch('/auth/login', {
         method: 'POST',
         headers: {
+          'Authorization': 'Basic ' + Buffer.from(email + ":" + password).toString('base64'),
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
@@ -24,7 +25,9 @@ const Login = ({ closeModal }) => {
         .then((response) => response.json())
         .then((data) => {
           // Check the response from the server
+          console.log("hello world")
           if (data.success) {
+            
             // Handle successful login
             // For example, you can store the user's authentication token in localStorage
             // and update the isLoggedIn state in the Header component
