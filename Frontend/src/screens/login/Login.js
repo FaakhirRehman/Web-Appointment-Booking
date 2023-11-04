@@ -1,17 +1,6 @@
-import { Card, CardContent, FormControl, InputLabel, Input, Button, Tab, Tabs } from '@material-ui/core';
+import { CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
 const Login = ({ closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,9 +13,37 @@ const Login = ({ closeModal }) => {
       setEmailError('Please fill out this field');
     } else {
       setEmailError('');
+      // Make an HTTP POST request to the login endpoint
+      fetch('/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Check the response from the server
+          if (data.success) {
+            // Handle successful login
+            // For example, you can store the user's authentication token in localStorage
+            // and update the isLoggedIn state in the Header component
+            localStorage.setItem('token', data.token);
+            //setIsLoggedIn(true);
+            closeModal();
+          } else {
+            // Handle login errors
+            // For example, display an error message to the user
+            //setLoginError(data.message);
+          }
+        })
+        .catch((error) => {
+          // Handle any errors that occur during the fetch request
+          console.error('Error:', error);
+        });
     }
-    // Implement other login logic
   };
+
 
   return (
     <div>
@@ -53,6 +70,7 @@ const Login = ({ closeModal }) => {
           LOGIN
         </Button>
       </CardContent>
+
     </div>
   );
 };

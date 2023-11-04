@@ -1,48 +1,75 @@
 .app-bar {
-    background-color: #81007f;
-    height: 70px;
-  }
-  
-  .toolbar {
-    display: flex;
-    padding-left: 11px;
-    justify-content: space-between;
-  }
-  .header {
-    background-color: #ff7f7f;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    padding-left: 11px; /* Padding to align the logo to the left */
-  }
-  .logo {
-    height: 35px;
-    float: left;
-    display: block; /* Ensures the height is respected */
-    margin-top: auto; /* Vertically centers the image */
-    margin-bottom: auto; /* Vertically centers the image */
-  }
-  .logoimg {
-    background-color: #ff7f7f;
-    height: 35px;
-    float: left;
-    display: block; /* Ensures the height is respected */
-    margin-top: auto; /* Vertically centers the image */
-    margin-bottom: auto; /* Vertically centers the image */
-  }
-  .right-section {
-    display: flex;
-    align-items: right;
-  }
-  .login-btn {
-    margin-right: 11px; /* Adjust the margin between the button and the right edge */
-  }
-  .app-title {
-    color: white; /* Color of the title */
-    font-size: 32px; /* Size of the title */
-    margin-top: auto; /* Vertically centers the image */
-    margin-bottom: auto; /* Vertically centers the image */
-    height: 35px;
-    width: 500px;
-    padding-left: 50px;
-  }
+  background-color: #81007f;
+  height: 70px;
+}
+
+.toolbar {
+  display: flex;
+  padding-left: 11px;
+  justify-content: space-between;
+}
+
+.header {
+  background-color: #ff7f7f;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  padding-left: 11px;
+  /* Padding to align the logo to the left */
+}
+
+.logo {
+  height: 35px;
+  float: left;
+  display: block;
+  /* Ensures the height is respected */
+  margin-top: auto;
+  /* Vertically centers the image */
+  margin-bottom: auto;
+  /* Vertically centers the image */
+}
+
+.logoimg {
+  background-color: #ff7f7f;
+  height: 35px;
+  float: left;
+  display: block;
+  /* Ensures the height is respected */
+  margin-top: auto;
+  /* Vertically centers the image */
+  margin-bottom: auto;
+  /* Vertically centers the image */
+}
+
+.right-section {
+  display: flex;
+  align-items: right;
+}
+
+.login-btn {
+  margin-right: 11px;
+  /* Adjust the margin between the button and the right edge */
+}
+
+.app-title {
+  color: white;
+  /* Color of the title */
+  font-size: 32px;
+  /* Size of the title */
+  margin-top: auto;
+  /* Vertically centers the image */
+  margin-bottom: auto;
+  /* Vertically centers the image */
+  height: 35px;
+  width: 500px;
+  padding-left: 50px;
+}
+
+.customStyles {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: 'translate(-50%, -50%)';
+}
