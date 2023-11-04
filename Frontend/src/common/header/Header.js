@@ -3,6 +3,18 @@ import { AppBar, Toolbar, Button, Card, CardContent, Tab, Tabs } from "@material
 import Modal from "react-modal";
 import "./Header.css";
 import logo from "../../assets/logo.jpeg";
+import Login from "../../screens/login/Login";
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 
 const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -48,23 +60,20 @@ const Header = () => {
             </Button>
             )}
         </div>
-        {/* stuff */}
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
-          
+          contentLabel="Login Modal"
+          style={customStyles}
         >
-          {/* Implement the Login/Register tabs using Material-UI components here if u plz */}
           <Card>
             <CardContent>
               <Tabs value={selectedTab} onChange={handleTabChange}>
                 <Tab label="LOGIN" />
                 <Tab label="REGISTER" />
               </Tabs>
-              {/* Here, based on the selectedTab value, you can chamhe the content for LOGIN and REGISTER */}
-              {/* LIKe so: 
-              {selectedTab is 0 then <LoginContent />}
-              {selectedTab is 1 then <RegisterContent />} */}
+              {selectedTab === 0 && <Login closeModal={closeModal} />}
+              {/* Add your register component for the second tab */}
             </CardContent>
           </Card>
         </Modal>

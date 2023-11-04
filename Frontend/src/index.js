@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Controller from "./screens/Controller";
+import Login from "./screens/login/Login";
 
 ReactDOM.render(<Controller />, document.getElementById("root"));
 
