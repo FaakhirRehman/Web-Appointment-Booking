@@ -5,15 +5,16 @@ const Login = ({ closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
+  const [passwordError, setpasswordError] = useState('');
+  const [invalidLoginError, setinvalidLoginError] = useState('');
 
   const handleLogin = () => {
-    // Implement your login logic here using the '/auth/login' endpoint
-    // Validate the email and password
     if (!email) {
-      setEmailError('Please fill out this field');
+      setEmailError('Enter Valid Email');
+    } else if(!password) {
+      setpasswordError('Enter Valid Password');
     } else {
       setEmailError('');
-      // Make an HTTP POST request to the login endpoint
       fetch('/auth/login', {
         method: 'POST',
         headers: {
@@ -24,33 +25,26 @@ const Login = ({ closeModal }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // Check the response from the server
-          console.log("hello world")
-          if (data.success) {
-            
-            // Handle successful login
-            // For example, you can store the user's authentication token in localStorage
-            // and update the isLoggedIn state in the Header component
-            localStorage.setItem('token', data.token);
-            //setIsLoggedIn(true);
+          if (data.accessToken != null) {
+            console.log(data.accessToken)
+            localStorage.setItem('token', data.accessToken);
             closeModal();
+            // Route the User to Home
+            // Change Login Button to Logout
           } else {
-            // Handle login errors
-            // For example, display an error message to the user
-            //setLoginError(data.message);
+            setinvalidLoginError('Invalid Email or Password');
           }
         })
         .catch((error) => {
-          // Handle any errors that occur during the fetch request
           console.error('Error:', error);
         });
     }
   };
 
-
   return (
     <div>
       <CardContent>
+        {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}  
         <FormControl fullWidth>
           <InputLabel>Email</InputLabel>
           <Input
@@ -68,12 +62,12 @@ const Login = ({ closeModal }) => {
             type="password"
             aria-describedby="password-helper-text"
           />
+          {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
         </FormControl>
         <Button variant="contained" color="primary" onClick={handleLogin}>
           LOGIN
         </Button>
       </CardContent>
-
     </div>
   );
 };

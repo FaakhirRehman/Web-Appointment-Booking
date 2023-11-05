@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import "./Header.css";
 import logo from "../../assets/logo.jpeg";
 import Login from "../../screens/login/Login";
+import Register from "../../screens/register/Register";
 
 const customStyles = {
   content: {
@@ -68,12 +69,13 @@ const Header = () => {
         >
           <Card>
             <CardContent>
+              {/* Add your Authenticate Card Top Here */}
               <Tabs value={selectedTab} onChange={handleTabChange}>
                 <Tab label="LOGIN" />
                 <Tab label="REGISTER" />
               </Tabs>
               {selectedTab === 0 && <Login closeModal={closeModal} />}
-              {/* Add your register component for the second tab */}
+              {selectedTab === 1 && <Register closeModal={closeModal} />}
             </CardContent>
           </Card>
         </Modal>
