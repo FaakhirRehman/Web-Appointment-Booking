@@ -33,7 +33,7 @@ const Login = ({ closeModal, handleLogin }) => {
             console.log(data.accessToken);
             localStorage.setItem('token', data.accessToken);
             closeModal();
-            handleLogin(); 
+            handleLogin();
           } else {
             setInvalidLoginError('Invalid Email or Password');
           }
