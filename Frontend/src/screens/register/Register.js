@@ -41,12 +41,12 @@ const Register = ({ closeModal }) => {
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-        "firstName":"firstName",
-        "lastName":"lname",
-        "dob":"1903-08-06",
-        "mobile":"1234567890",
-        "password":"test3",
-        "emailId":"test3@gmasil.com"
+        "firstName":firstName,
+        "lastName":lastName,
+        "dob":dob,
+        "mobile":mobile,
+        "password":password,
+        "emailId":emailId
       });
 
       var requestOptions = {
@@ -55,7 +55,7 @@ const Register = ({ closeModal }) => {
         body: raw,
         redirect: 'follow'
       };
-
+      console.log(raw)
       fetch("/users/register", requestOptions)
       .then(response => response.text())
       .then((data) => {
