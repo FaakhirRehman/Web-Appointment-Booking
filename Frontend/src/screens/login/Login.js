@@ -9,6 +9,10 @@ const Login = ({ closeModal, handleLogin }) => {
   const [invalidLoginError, setInvalidLoginError] = useState('');
 
   const handleLoginSubmit = () => {
+    setEmailError('');
+    setPasswordError('');
+    setInvalidLoginError('');
+
     if (!email) {
       setEmailError('Enter Valid Email');
     } else if (!password) {
@@ -25,11 +29,11 @@ const Login = ({ closeModal, handleLogin }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data != null) {
+          if (data.accessToken != null) {
             console.log(data.accessToken);
             localStorage.setItem('token', data.accessToken);
             closeModal();
-            handleLogin(); // Call the handleLogin function to set isLoggedIn to true in the Header component
+            handleLogin(); 
           } else {
             setInvalidLoginError('Invalid Email or Password');
           }

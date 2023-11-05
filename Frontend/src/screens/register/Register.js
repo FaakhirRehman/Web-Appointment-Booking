@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 const Register = ({ closeModal }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [emailId, setEmailId] = useState('');
   const [password, setPassword] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [dob, setDob] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [lastNameError, setLastNameError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -21,13 +21,13 @@ const Register = ({ closeModal }) => {
       setFirstNameError('Enter First Name');
     } else if (!lastName) {
       setLastNameError('Enter Last Name');
-    } else if (!email) {
+    } else if (!emailId) {
       setEmailError('Enter Valid Email');
     } else if (!password) {
       setPasswordError('Enter Valid Password');
-    } else if (!contactNumber) {
+    } else if (!mobile) {
       setContactNumberError('Enter Contact Number');
-    } else if (!dateOfBirth) {
+    } else if (!dob) {
       setDateOfBirthError('Enter Date of Birth');
     } else {
       setFirstNameError('');
@@ -36,26 +36,59 @@ const Register = ({ closeModal }) => {
       setPasswordError('');
       setContactNumberError('');
       setDateOfBirthError('');
-      fetch('/auth/register', {
+
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "firstName":"firstName",
+        "lastName":"lname",
+        "dob":"1903-08-06",
+        "mobile":"1234567890",
+        "password":"test3",
+        "emailId":"test3@gmasil.com"
+      });
+
+      var requestOptions = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ firstName, lastName, email, password, contactNumber, dateOfBirth }),
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("/users/register", requestOptions)
+      .then(response => response.text())
+      .then((data) => {
+        //console.log(data);
+        if (data != null) {
+          console.log(data);
+          closeModal();
+        } else {
+          setRegistrationError('Error registering. Please try again...');
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            console.log('Registration successful');
-            closeModal();
-            // Optionally, you can perform additional actions after a successful registration
-          } else {
-            setRegistrationError('Error registering the user');
-          }
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+      .catch(error => console.log('error', error));
+
+      // fetch('/users/register', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ firstName, lastName, emailId, password, mobile, dob }),
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (data.success) {
+      //       console.log('Registration successful');
+      //       closeModal();
+      //       // Optionally, you can perform additional actions after a successful registration
+      //     } else {
+      //       setRegistrationError('Error registering the user');
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error:', error);
+      //   });
     }
   };
 
@@ -82,8 +115,8 @@ const Register = ({ closeModal }) => {
         <FormControl fullWidth>
           <InputLabel>Email</InputLabel>
           <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
             aria-describedby="email-helper-text"
           />
           {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
@@ -100,8 +133,8 @@ const Register = ({ closeModal }) => {
         <FormControl fullWidth>
           <InputLabel>Contact Number</InputLabel>
           <Input
-            value={contactNumber}
-            onChange={(e) => setContactNumber(e.target.value)}
+            value={mobile}
+            onChange={(e) => setMobile(e.target.value)}
           />
           {contactNumberError && <div style={{ color: 'red' }}>{contactNumberError}</div>}
         </FormControl>
@@ -110,8 +143,8 @@ const Register = ({ closeModal }) => {
             id="date"
             label="Date of Birth"
             type="date"
-            value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e.target.value)}
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
