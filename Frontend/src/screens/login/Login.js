@@ -1,18 +1,18 @@
 import { CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
-const Login = ({ closeModal }) => {
+const Login = ({ closeModal, handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordError, setpasswordError] = useState('');
-  const [invalidLoginError, setinvalidLoginError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [invalidLoginError, setInvalidLoginError] = useState('');
 
-  const handleLogin = () => {
+  const handleLoginSubmit = () => {
     if (!email) {
       setEmailError('Enter Valid Email');
-    } else if(!password) {
-      setpasswordError('Enter Valid Password');
+    } else if (!password) {
+      setPasswordError('Enter Valid Password');
     } else {
       setEmailError('');
       fetch('/auth/login', {
@@ -25,14 +25,13 @@ const Login = ({ closeModal }) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.accessToken != null) {
-            console.log(data.accessToken)
+          if (data != null) {
+            console.log(data.accessToken);
             localStorage.setItem('token', data.accessToken);
             closeModal();
-            // Route the User to Home
-            // Change Login Button to Logout
+            handleLogin(); // Call the handleLogin function to set isLoggedIn to true in the Header component
           } else {
-            setinvalidLoginError('Invalid Email or Password');
+            setInvalidLoginError('Invalid Email or Password');
           }
         })
         .catch((error) => {
@@ -44,7 +43,7 @@ const Login = ({ closeModal }) => {
   return (
     <div>
       <CardContent>
-        {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}  
+        {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}
         <FormControl fullWidth>
           <InputLabel>Email</InputLabel>
           <Input
@@ -64,7 +63,7 @@ const Login = ({ closeModal }) => {
           />
           {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
         </FormControl>
-        <Button variant="contained" color="primary" onClick={handleLogin}>
+        <Button variant="contained" color="primary" onClick={handleLoginSubmit}>
           LOGIN
         </Button>
       </CardContent>

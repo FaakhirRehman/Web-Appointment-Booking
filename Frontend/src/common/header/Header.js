@@ -30,14 +30,13 @@ const Header = () => {
   };
 
   const handleLogin = () => {
-    // Logic for handling user login me thinks
     setIsLoggedIn(true);
   };
 
   const handleLogout = () => {
-    // Logic for handling user logout probs
     setIsLoggedIn(false);
   };
+
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
@@ -46,27 +45,23 @@ const Header = () => {
     <AppBar position="static" className="app-bar">
       <Toolbar className="toolbar">
         <div className="logo">
-            <img src={logo} alt="Logo" className="logoimg" />
-            <h1 className="app-title">Doctor Finder</h1>
+          <img src={logo} alt="Logo" className="logoimg" />
+          <h1 className="app-title">Doctor Finder</h1>
         </div>
-        
+
         <div className="right-section">
-            {isLoggedIn ? (
-            <Button  className="login-btn" variant="contained" color="secondary" onClick={handleLogout}>
-                Logout
+          {isLoggedIn ? (
+            <Button className="login-btn" variant="contained" color="secondary" onClick={handleLogout}>
+              Logout
             </Button>
-            ) : (
-            <Button  className="login-btn" variant="contained" color="primary" onClick={openModal}>
-                Login
+          ) : (
+            <Button className="login-btn" variant="contained" color="primary" onClick={openModal}>
+              Login
             </Button>
-            )}
+          )}
         </div>
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Login Modal"
-          style={customStyles}
-        >
+
+        <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Login Modal" style={customStyles}>
           <Card>
             <CardContent>
               {/* Add your Authenticate Card Top Here */}
@@ -74,7 +69,7 @@ const Header = () => {
                 <Tab label="LOGIN" />
                 <Tab label="REGISTER" />
               </Tabs>
-              {selectedTab === 0 && <Login closeModal={closeModal} />}
+              {selectedTab === 0 && <Login closeModal={closeModal} handleLogin={handleLogin} />}
               {selectedTab === 1 && <Register closeModal={closeModal} />}
             </CardContent>
           </Card>

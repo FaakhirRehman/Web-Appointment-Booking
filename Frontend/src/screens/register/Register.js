@@ -1,4 +1,4 @@
-import { CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { CardContent, FormControl, InputLabel, Input, Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 
 const Register = ({ closeModal }) => {
@@ -7,11 +7,13 @@ const Register = ({ closeModal }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [firstNameError, setFirstNameError] = useState('');
   const [lastNameError, setLastNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [contactNumberError, setContactNumberError] = useState('');
+  const [dateOfBirthError, setDateOfBirthError] = useState('');
   const [registrationError, setRegistrationError] = useState('');
 
   const handleRegister = () => {
@@ -25,18 +27,21 @@ const Register = ({ closeModal }) => {
       setPasswordError('Enter Valid Password');
     } else if (!contactNumber) {
       setContactNumberError('Enter Contact Number');
+    } else if (!dateOfBirth) {
+      setDateOfBirthError('Enter Date of Birth');
     } else {
       setFirstNameError('');
       setLastNameError('');
       setEmailError('');
       setPasswordError('');
       setContactNumberError('');
+      setDateOfBirthError('');
       fetch('/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ firstName, lastName, email, password, contactNumber }),
+        body: JSON.stringify({ firstName, lastName, email, password, contactNumber, dateOfBirth }),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -99,6 +104,19 @@ const Register = ({ closeModal }) => {
             onChange={(e) => setContactNumber(e.target.value)}
           />
           {contactNumberError && <div style={{ color: 'red' }}>{contactNumberError}</div>}
+        </FormControl>
+        <FormControl fullWidth>
+          <TextField
+            id="date"
+            label="Date of Birth"
+            type="date"
+            value={dateOfBirth}
+            onChange={(e) => setDateOfBirth(e.target.value)}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+          {dateOfBirthError && <div style={{ color: 'red' }}>{dateOfBirthError}</div>}
         </FormControl>
         <Button variant="contained" color="primary" onClick={handleRegister}>
           REGISTER
