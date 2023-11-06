@@ -13,10 +13,16 @@ import {
     CardHeader,
     CardContent,
 } from '@material-ui/core';
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'; 
+import DoctorDetails from './DoctorDetails';
 
 const DoctorTab = () => {
     const [speciality, setSpeciality] = useState('');
     const [doctors, setDoctors] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+    const [timeSlotError, setTimeSlotError] = useState('');
+    const [bookingError, setBookingError] = useState('');
     const [open, setOpen] = useState(false);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
 
@@ -43,6 +49,23 @@ const DoctorTab = () => {
     const handleBookAppointment = (doctor) => {
         setSelectedDoctor(doctor);
         setOpen(true);
+    };
+
+    const handleTimeSlotChange = (event) => {
+        const selectedTime = event.target.value;
+        setSelectedTimeSlot(selectedTime);
+        if (timeSlotError) {
+            setTimeSlotError('');
+        }
+    };
+
+    const handleViewDetails = (doctor) => {
+        setSelectedDoctor(doctor);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     let specialties = [
@@ -89,15 +112,10 @@ const DoctorTab = () => {
                 </Select>
             </FormControl>
 
-            {/* List of doctors */}
             {doctors.map((doctor, index) => (
                 <Paper key={index} style={{ width: '40%', padding: '20px', margin: '20px' }}>
-                    <Typography variant="h5">{doctor.college}</Typography>
-                    <Typography>{`Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
-                    <Typography>{`Email: ${doctor.emailId}`}</Typography>
+                    <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
-                    <Typography>{`Highest Qualification: ${doctor.highestQualification}`}</Typography>
-                    <Typography>{`Total Years of Experience: ${doctor.totalYearsOfExp}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
                     <Button
                         style={{ width: '40%', margin: '10px' }}
@@ -114,22 +132,7 @@ const DoctorTab = () => {
             ))}
 
             {/* Modal for booking appointment */}
-            <Modal open={open} onClose={handleCloseModal}>
-                <Card style={{ margin: '10% auto', width: '50%', padding: '20px' }}>
-                    <CardHeader title="Book an Appointment" />
-                    <CardContent>
-                        <TextField disabled value={selectedDoctor && selectedDoctor.firstName + ' ' + selectedDoctor.lastName} />
-                        {/* MuiPickersUtilsProvider for date picker */}
-                        {/* Select and MenuItem for time slot selection */}
-                        <FormControl>
-                            <TextField label="Medical History" />
-                        </FormControl>
-                        <FormControl>
-                            <TextField label="Symptoms" />
-                        </FormControl>
-                    </CardContent>
-                </Card>
-            </Modal>
+           
         </div>
     );
 };
