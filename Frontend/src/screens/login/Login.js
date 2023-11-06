@@ -31,7 +31,10 @@ const Login = ({ closeModal, handleLogin }) => {
         .then((data) => {
           if (data.accessToken != null) {
             console.log(data.accessToken);
-            localStorage.setItem('token', data.accessToken);
+            localStorage.setItem('token', `Bearer ${data.accessToken}`); // Storing the token with 'Bearer ' prefix
+            const encodedEmail = email.replace('@', '_at_');
+            localStorage.setItem('id', encodedEmail);
+            console.log(encodedEmail);
             closeModal();
             handleLogin();
           } else {
