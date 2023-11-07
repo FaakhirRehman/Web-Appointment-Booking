@@ -9,6 +9,7 @@ import {
     MenuItem
 } from '@material-ui/core';
 import DoctorDetails from './DoctorDetails';
+import BookAppointment from './BookAppointment';
 
 const DoctorTab = () => {
     const [speciality, setSpeciality] = useState('');
@@ -98,7 +99,14 @@ const DoctorTab = () => {
                     <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
-                    
+                    <Button
+                        style={{ width: '40%', margin: '10px' }}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleBookAppointment(doctor)}
+                    >
+                        BOOK APPOINTMENT
+                    </Button>
                     <Button 
                         style={{ width: '40%', margin: '10px', backgroundColor: 'green' }}
                         variant="contained" color="primary" 
@@ -111,6 +119,10 @@ const DoctorTab = () => {
 
             <div>
                 <DoctorDetails doctor={selectedDoctor} open={detailOpen} handleClose={handleClose} />
+            </div>
+
+            <div>
+                <BookAppointment doctor={selectedDoctor} open={bookOpen} handleClose={handleClose}/>
             </div>
         </div>
     );

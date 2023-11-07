@@ -68,27 +68,6 @@ const Register = ({ closeModal }) => {
         }
       })
       .catch(error => console.log('error', error));
-
-      // fetch('/users/register', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ firstName, lastName, emailId, password, mobile, dob }),
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     if (data.success) {
-      //       console.log('Registration successful');
-      //       closeModal();
-      //       // Optionally, you can perform additional actions after a successful registration
-      //     } else {
-      //       setRegistrationError('Error registering the user');
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.error('Error:', error);
-      //   });
     }
   };
 
