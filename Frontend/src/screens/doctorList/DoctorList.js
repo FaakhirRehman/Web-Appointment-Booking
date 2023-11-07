@@ -80,7 +80,7 @@ const DoctorTab = () => {
 
     return (
         <div>
-        <div style={{ marginLeft:'220px', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ marginLeft:'220px', alignItems: 'center' }}>
             <FormControl style={{ minWidth: 120, margin: '20px' }}>
                 <InputLabel id="speciality-label">Specialty</InputLabel>
                 <Select
@@ -97,7 +97,7 @@ const DoctorTab = () => {
              </div>
         <div>           
             {doctors.map((doctor, index) => (
-                <Paper key={index} style={{ width: '60%', padding: '20px', margin: '20px' }}>
+                <Paper key={index} style={{ width: '600px', padding: '20px', margin: '20px' }}>
                     <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
