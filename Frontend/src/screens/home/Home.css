@@ -2,12 +2,12 @@
 .full-width {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Adjust as needed */
+    justify-content: center;
   }
   
   .centered {
     width: 100%;
     display: flex;
-    margin-left: 10%;
+    margin-left: 5%;
     justify-content: center;
   }
