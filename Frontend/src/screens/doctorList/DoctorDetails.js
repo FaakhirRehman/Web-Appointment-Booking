@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 const DoctorDetails = ({ doctor, open, handleClose }) => {
+    if (!doctor) return null;
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
@@ -23,7 +24,7 @@ const DoctorDetails = ({ doctor, open, handleClose }) => {
                             <Typography>{`City: ${doctor.city}`}</Typography>
                             <Typography>{`Email: ${doctor.emailId}`}</Typography>
                             <Typography>{`Mobile: ${doctor.mobile}`}</Typography>
-                            <Typography>{`Rating: ${'⭐'.repeat(doctor.rating)}`}</Typography>
+                            <Typography>{`Rating: ${'⭐️'.repeat(doctor.rating)}`}</Typography>
                         </Paper>
                     </CardContent>
                 </Card>

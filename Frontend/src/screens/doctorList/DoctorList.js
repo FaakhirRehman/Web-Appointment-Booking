@@ -3,27 +3,18 @@ import {
     Paper,
     Typography,
     Button,
-    TextField,
     FormControl,
     InputLabel,
     Select,
-    MenuItem,
-    Modal,
-    Card,
-    CardHeader,
-    CardContent,
+    MenuItem
 } from '@material-ui/core';
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'; 
 import DoctorDetails from './DoctorDetails';
 
 const DoctorTab = () => {
     const [speciality, setSpeciality] = useState('');
     const [doctors, setDoctors] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
-    const [timeSlotError, setTimeSlotError] = useState('');
-    const [bookingError, setBookingError] = useState('');
-    const [open, setOpen] = useState(false);
+    const [detailOpen, setdetailOpen] = useState(false);
+    const [bookOpen, setbookOpen] = useState(false);
     const [selectedDoctor, setSelectedDoctor] = useState(null);
 
     useEffect(() => {
@@ -48,24 +39,17 @@ const DoctorTab = () => {
 
     const handleBookAppointment = (doctor) => {
         setSelectedDoctor(doctor);
-        setOpen(true);
-    };
-
-    const handleTimeSlotChange = (event) => {
-        const selectedTime = event.target.value;
-        setSelectedTimeSlot(selectedTime);
-        if (timeSlotError) {
-            setTimeSlotError('');
-        }
+        setbookOpen(true);
     };
 
     const handleViewDetails = (doctor) => {
         setSelectedDoctor(doctor);
-        setOpen(true);
+        setdetailOpen(true);
     };
 
     const handleClose = () => {
-        setOpen(false);
+        setdetailOpen(false);
+        setbookOpen(false);
     };
 
     let specialties = [
@@ -87,17 +71,14 @@ const DoctorTab = () => {
         }
     };
 
-    const handleCloseModal = () => {
-        setOpen(false);
-    };
 
     const getStars = (rating) => {
         const stars = '⭐️'.repeat(rating);
         return stars;
-      };
+    };
 
     return (
-        <div style={{ justifyContent: 'center', alignItems: 'center' }}> 
+        <div style={{ justifyContent: 'center', alignItems: 'center' }}>
             <FormControl style={{ minWidth: 120, margin: '20px' }}>
                 <InputLabel id="speciality-label">Specialty</InputLabel>
                 <Select
@@ -117,22 +98,20 @@ const DoctorTab = () => {
                     <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
-                    <Button
-                        style={{ width: '40%', margin: '10px' }}
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleBookAppointment(doctor)}
+                    
+                    <Button 
+                        style={{ width: '40%', margin: '10px', backgroundColor: 'green' }}
+                        variant="contained" color="primary" 
+                        onClick={() => handleViewDetails(doctor)}
                     >
-                        BOOK APPOINTMENT
-                    </Button>
-                    <Button style={{ width: '40%', margin: '10px', backgroundColor: 'green' }} variant="contained" color="primary">
                         VIEW DETAILS
                     </Button>
                 </Paper>
             ))}
 
-            {/* Modal for booking appointment */}
-           
+            <div>
+                <DoctorDetails doctor={selectedDoctor} open={detailOpen} handleClose={handleClose} />
+            </div>
         </div>
     );
 };
