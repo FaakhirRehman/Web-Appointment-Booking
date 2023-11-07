@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
+import RateAppointment from './RateAppointment'; // Ensure the correct path to the RateAppointment file
 
 const Appointment = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [appointments, setAppointments] = useState([]);
   const [userName, setUserName] = useState('');
-
+  const [rateModalOpen, setRateModalOpen] = useState(false);
+  const [selectedDoctorId, setSelectedDoctorId] = useState('');
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState('');
   useEffect(() => {
     const loggedInStatus = !!localStorage.getItem('token');
     setIsLoggedIn(loggedInStatus);
@@ -46,6 +49,16 @@ const Appointment = () => {
     console.log(`/users/${userName}/appointments`);
   }, [isLoggedIn, userName]); // Trigger the fetch when userName changes
 
+
+  const handleCloseRateModal = () => {
+    setRateModalOpen(false);
+  };
+  const handleOpenRateModal = (doctorId, appointmentId) => {
+    setRateModalOpen(true);
+    setSelectedDoctorId(doctorId);
+    setSelectedAppointmentId(appointmentId);
+  };
+
   return (
     <div>
       {isLoggedIn ? (
@@ -62,13 +75,20 @@ const Appointment = () => {
               <p>Appointment Date: {appointment.appointmentDate}</p>
               <p>Symptoms: {appointment.symptoms}</p>
               <p>Previous Medical History: {appointment.priorMedicalHistory}</p>
-              <button>RATE APPOINTMENT</button>
+              <button onClick={() => handleOpenRateModal(appointment.doctorId, appointment.appointmentId)}>RATE APPOINTMENT</button>
             </Paper>
           ))
         )
       ) : (
         <p>Login to see appointments</p>
       )}
+
+<RateAppointment
+        open={rateModalOpen}
+        handleClose={handleCloseRateModal}
+        doctorId={selectedDoctorId}
+        appointmentId={selectedAppointmentId}
+      />
     </div>
   );
 };
