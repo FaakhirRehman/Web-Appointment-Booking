@@ -11,6 +11,21 @@ import {
 } from '@material-ui/core';
 import StarIcon from '@material-ui/icons/Star';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+const styles = {
+  card: {
+    width: '60%',
+    margin:  'auto',
+    marginTop: '10%',
+    display: 'flex',
+    flexDirection: 'column', // Change to column layout
+    justifyContent: 'left', // Center vertically
+    alignItems: 'left', // Center horizontally
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0px 0px 10px 2px rgba(0,0,0,0.1)',
+  },
+};
+
 
 const RateAppointment = ({ open, handleClose, doctorId, appointmentId }) => {
   const [comments, setComments] = useState('');
@@ -75,22 +90,38 @@ const RateAppointment = ({ open, handleClose, doctorId, appointmentId }) => {
 
   return (
     <Modal open={open} onClose={handleClose}>
-      <Card>
-        <CardHeader title="Rate an Appointment" />
-        <CardContent>
+      <Card style={styles.card}>
+      <CardHeader
+        title="Rate an Appointments"
+        style={{
+          backgroundColor: 'purple',
+          height: '70px',
+          padding: '11px',
+          color: 'white',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.12)', // Adds a bottom border
+        
+        }}
+        
+        />
+        <div style={{ marginTop: '10px' }}></div>
+        <CardContent style={{ paddingTop: 0 }}>
           <FormControl>
+            Comments
             <TextField
-              label="Comments"
+              label=""
               value={comments}
               onChange={(e) => setComments(e.target.value)}
             />
           </FormControl>
+          <CardContent style={{ paddingTop: 0 }}>
           <FormControl>
             <div>
-              {renderRatingButtons()}
+              <p>Rating
+              {renderRatingButtons()}</p>
             </div>
             {error && <div style={{ color: 'red' }}>{error}</div>}
           </FormControl>
+          </CardContent>
           <Button variant="contained" color="primary" onClick={handleRateAppointment}>
             RATE APPOINTMENT
           </Button>

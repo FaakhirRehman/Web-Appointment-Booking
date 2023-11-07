@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
 import RateAppointment from './RateAppointment'; // Ensure the correct path to the RateAppointment file
-
+import {
+  Button,
+} from '@material-ui/core';
 const Appointment = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [appointments, setAppointments] = useState([]);
@@ -69,13 +71,13 @@ const Appointment = () => {
             <Paper
               key={appointment.appointmentId}
               elevation={3}
-              style={{ margin: '15px', padding: '20px', cursor: 'pointer' }}
+              style={{ margin: '15px', padding: '20px', cursor: 'pointer',textAlign: 'left', }}
             >
               <p>Doctor's Name: {appointment.doctorName}</p>
               <p>Appointment Date: {appointment.appointmentDate}</p>
               <p>Symptoms: {appointment.symptoms}</p>
               <p>Previous Medical History: {appointment.priorMedicalHistory}</p>
-              <button onClick={() => handleOpenRateModal(appointment.doctorId, appointment.appointmentId)}>RATE APPOINTMENT</button>
+              <Button variant="contained" color="primary" onClick={() => handleOpenRateModal(appointment.doctorId, appointment.appointmentId)}>RATE APPOINTMENT</Button>
             </Paper>
           ))
         )
