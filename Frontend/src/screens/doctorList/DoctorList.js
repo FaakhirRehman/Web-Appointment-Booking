@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import DoctorDetails from './DoctorDetails';
 import BookAppointment from './BookAppointment';
-
+import "./DoctorList.css";
 const DoctorTab = () => {
     const [speciality, setSpeciality] = useState('');
     const [doctors, setDoctors] = useState([]);
@@ -79,7 +79,8 @@ const DoctorTab = () => {
     };
 
     return (
-        <div style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div>
+        <div style={{ marginLeft:'220px', justifyContent: 'center', alignItems: 'center' }}>
             <FormControl style={{ minWidth: 120, margin: '20px' }}>
                 <InputLabel id="speciality-label">Specialty</InputLabel>
                 <Select
@@ -93,9 +94,10 @@ const DoctorTab = () => {
                     ))}
                 </Select>
             </FormControl>
-
+             </div>
+        <div>           
             {doctors.map((doctor, index) => (
-                <Paper key={index} style={{ width: '40%', padding: '20px', margin: '20px' }}>
+                <Paper key={index} style={{ width: '60%', padding: '20px', margin: '20px' }}>
                     <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
@@ -124,6 +126,7 @@ const DoctorTab = () => {
             <div>
                 <BookAppointment doctor={selectedDoctor} open={bookOpen} handleClose={handleClose}/>
             </div>
+        </div>
         </div>
     );
 };

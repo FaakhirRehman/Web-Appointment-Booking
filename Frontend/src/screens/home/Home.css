@@ -1,0 +1,13 @@
+/* styles.css */
+.full-width {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+  }
+  
+  .centered {
+    width: 100%;
+    display: flex;
+    margin-left: 10%;
+    justify-content: center;
+  }
