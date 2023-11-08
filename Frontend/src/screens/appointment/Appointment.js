@@ -16,9 +16,10 @@ const Appointment = () => {
     setIsLoggedIn(loggedInStatus);
     const storedEmail = localStorage.getItem('id');
     const decodedEmail = storedEmail ? storedEmail.replace('_at_', '@') : '';
-    console.log(decodedEmail);
-    if (loggedInStatus && decodedEmail) {
-      setUserName(decodedEmail);
+    const storedId = decodedEmail;
+    console.log(storedId);
+    if (loggedInStatus && storedId) {
+      setUserName(storedId);
     }
   }, []);
 
@@ -70,9 +71,9 @@ const Appointment = () => {
             <Paper
               key={appointment.appointmentId}
               elevation={3}
-              style={{ margin: '15px', padding: '20px', cursor: 'pointer',textAlign: 'left', }}
+              style={{ fontFamily:'Roberto' ,margin: '15px', padding: '20px', cursor: 'pointer',textAlign: 'left', }}
             >
-              <p>Doctor's Name: {appointment.doctorName}</p>
+              <p style={{fontSize:'22px',fontstyle: 'oblique'}}>Doctor's Name: {appointment.doctorName}</p>
               <p>Appointment Date: {appointment.appointmentDate}</p>
               <p>Symptoms: {appointment.symptoms}</p>
               <p>Previous Medical History: {appointment.priorMedicalHistory}</p>
@@ -84,7 +85,7 @@ const Appointment = () => {
         <p>Login to see appointments</p>
       )}
 
-  <RateAppointment
+<RateAppointment
         open={rateModalOpen}
         handleClose={handleCloseRateModal}
         doctorId={selectedDoctorId}

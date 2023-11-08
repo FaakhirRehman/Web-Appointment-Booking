@@ -70,17 +70,19 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Card style={{ margin: '10% auto', width: '50%', padding: '20px' }}>
+                <Card style={{ margin: '10% auto', width: '50%'}}>
                     <CardContent>
                         <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} /> 
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
-                        <FormControl fullWidth>
-                            <TextField label="Doctor's Name" value={`${doctor.firstName} ${doctor.lastName}`} disabled />
+                        <FormControl style={{paddingTop:'1%'}} fullWidth>
+                            Doctor's Name
+                            <TextField style={{width:'30%',alignItems:'left'}}value={`${doctor.firstName} ${doctor.lastName}`} disabled />
                         </FormControl>
                         <FormControl fullWidth>
+                            Select Date
                             <TextField
-                                label="Select Date"
                                 type="date"
+                                style={{width:'30%',alignItems:'left'}}
                                 value={selectedDate}
                                 InputLabelProps={{
                                     shrink: true,
@@ -89,8 +91,9 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                             />
                         </FormControl>
                         <FormControl fullWidth>
-                            <InputLabel id="time-slot-label">Select Time Slot</InputLabel>
+                            Select Time Slot
                             <Select
+                                style={{width:'30%',alignItems:'left'}}
                                 labelId="time-slot-label"
                                 id="time-slot"
                                 value={selectedTimeSlot}
@@ -114,20 +117,22 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth>
+                        Medical History
                             <TextField
-                                label="Medical History"
                                 value={medicalHistory}
                                 onChange={(e) => setMedicalHistory(e.target.value)}
+                                style={{paddingTop:'10%', width:'30%',alignItems:'left'}}
                             />
                         </FormControl>
                         <FormControl fullWidth>
+                            Symptoms
                             <TextField
-                                label="Symptoms"
                                 value={symptoms}
                                 onChange={(e) => setSymptoms(e.target.value)}
+                                style={{paddingTop:'10%', width:'30%',alignItems:'left'}}
                             />
                         </FormControl>
-                        <Button variant="contained" color="primary" onClick={handleAppointmentBooking}>
+                        <Button style={{marginTop:'5%'}} variant="contained" color="primary" onClick={handleAppointmentBooking}>
                             BOOK APPOINTMENT
                         </Button>
                     </CardContent>

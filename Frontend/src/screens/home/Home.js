@@ -22,8 +22,9 @@ const Home = () => {
       </div>
       <div className='centered'>
       {selectedTab === 0 && <DoctorList />} {/* Doctors go here */}
-      {selectedTab === 1 && <Appointment />} {/* apps go here*/}
+      
       </div>
+      {selectedTab === 1 && <Appointment />} {/* apps go here*/}
       </div>
       
   );
