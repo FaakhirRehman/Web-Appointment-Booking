@@ -49,7 +49,7 @@ const Login = ({ closeModal, handleLogin }) => {
 
 return (
   <div>
-    <CardContent style={{paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
+    <CardContent style={{width:'60%' ,paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
     {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}
         <FormControl fullWidth>
         <p style={{color:'brown'}}>Email*</p>

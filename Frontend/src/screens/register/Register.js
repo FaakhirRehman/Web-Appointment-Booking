@@ -73,10 +73,10 @@ const Register = ({ closeModal }) => {
 
   return (
     <div>
-      <CardContent>
+      <CardContent style={{paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
         {registrationError && <div style={{ color: 'red' }}>{registrationError}</div>}
         <FormControl fullWidth>
-          <InputLabel>First Name</InputLabel>
+          First Name
           <Input
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
@@ -84,7 +84,7 @@ const Register = ({ closeModal }) => {
           {firstNameError && <div style={{ color: 'red' }}>{firstNameError}</div>}
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel>Last Name</InputLabel>
+          Last Name
           <Input
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
@@ -92,7 +92,7 @@ const Register = ({ closeModal }) => {
           {lastNameError && <div style={{ color: 'red' }}>{lastNameError}</div>}
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel>Email</InputLabel>
+          Email
           <Input
             value={emailId}
             onChange={(e) => setEmailId(e.target.value)}
@@ -101,7 +101,7 @@ const Register = ({ closeModal }) => {
           {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel>Password</InputLabel>
+          Password
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -110,7 +110,7 @@ const Register = ({ closeModal }) => {
           {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel>Contact Number</InputLabel>
+         Contact Number
           <Input
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
@@ -118,9 +118,9 @@ const Register = ({ closeModal }) => {
           {contactNumberError && <div style={{ color: 'red' }}>{contactNumberError}</div>}
         </FormControl>
         <FormControl fullWidth>
+          Date of Birth
           <TextField
             id="date"
-            label="Date of Birth"
             type="date"
             value={dob}
             onChange={(e) => setDob(e.target.value)}
