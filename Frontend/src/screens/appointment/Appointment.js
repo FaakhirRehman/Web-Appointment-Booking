@@ -16,10 +16,9 @@ const Appointment = () => {
     setIsLoggedIn(loggedInStatus);
     const storedEmail = localStorage.getItem('id');
     const decodedEmail = storedEmail ? storedEmail.replace('_at_', '@') : '';
-    const storedId = decodedEmail;
-    console.log(storedId);
-    if (loggedInStatus && storedId) {
-      setUserName(storedId);
+    console.log(decodedEmail);
+    if (loggedInStatus && decodedEmail) {
+      setUserName(decodedEmail);
     }
   }, []);
 
@@ -85,7 +84,7 @@ const Appointment = () => {
         <p>Login to see appointments</p>
       )}
 
-<RateAppointment
+  <RateAppointment
         open={rateModalOpen}
         handleClose={handleCloseRateModal}
         doctorId={selectedDoctorId}

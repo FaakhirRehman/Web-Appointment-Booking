@@ -9,6 +9,7 @@ import {
     MenuItem,
     Button,
     Modal,
+    CardHeader,
 } from '@material-ui/core';
 
 const BookAppointment = ({ doctor, open, handleClose }) => {
@@ -18,15 +19,22 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     const [symptoms, setSymptoms] = useState('');
     const [serverResponse, setServerResponse] = useState('');
 
+    const storedEmail = localStorage.getItem('id');
+    const decodedEmail = storedEmail ? storedEmail.replace('_at_', '@') : '';
+
+    let text = decodedEmail;
+    const myArray = text.split("@");
+    let username = myArray[0];
+
     const handleAppointmentBooking = () => {
         setServerResponse('');
         const token = localStorage.getItem('token')
         const raw = JSON.stringify({
             doctorId: doctor.id,
             doctorName: `${doctor.firstName} ${doctor.lastName}`,
-            userId: 'test@gmasil.com',
-            userName: 'fname',
-            userEmailId: localStorage.getItem('id'),
+            userId: decodedEmail,
+            userName: username,
+            userEmailId: decodedEmail,
             timeSlot: selectedTimeSlot,
             appointmentDate: selectedDate,
             createdDate: '',
@@ -42,12 +50,12 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
               },
             body: raw,
         };
-        console.log(requestOptions)
+        setServerResponse('');
         try {
             
             const response = fetch('/appointments', requestOptions);
             const statusCode = response.status;
-            if (statusCode === 200) {
+            if (statusCode => 200 && statusCode < 300) {
                 setServerResponse('Appointment booked successfully');
             }
             else {
@@ -64,7 +72,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
             <Modal open={open} onClose={handleClose}>
                 <Card style={{ margin: '10% auto', width: '50%', padding: '20px' }}>
                     <CardContent>
-                        <h2>Book an Appointment</h2>
+                        <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} /> 
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
                         <FormControl fullWidth>
                             <TextField label="Doctor's Name" value={`${doctor.firstName} ${doctor.lastName}`} disabled />
