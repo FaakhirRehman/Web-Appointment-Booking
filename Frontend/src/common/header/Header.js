@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AppBar, Toolbar, Button, Card, CardContent, Tab, Tabs } from "@material-ui/core";
+import { CardHeader, AppBar, Toolbar, Button, Card, CardContent, Tab, Tabs } from "@material-ui/core";
 import Modal from "react-modal";
 import "./Header.css";
 import logo from "../../assets/logo.jpeg";
@@ -75,6 +75,7 @@ const Header = () => {
 
         <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Login Modal" style={customStyles}>
           <Card>
+          <CardHeader title="Authentication" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
             <CardContent>
               {/* Add your Authenticate Card Top Here */}
               <Tabs value={selectedTab} onChange={handleTabChange}>

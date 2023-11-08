@@ -1,4 +1,4 @@
-import { CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { CardHeader, CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
 const Login = ({ closeModal, handleLogin }) => {
@@ -47,12 +47,12 @@ const Login = ({ closeModal, handleLogin }) => {
     }
   };
 
-  return (
-    <div>
-      <CardContent>
-        {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}
+return (
+  <div>
+    <CardContent style={{paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
+    {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}
         <FormControl fullWidth>
-          <InputLabel>Email</InputLabel>
+        <p style={{color:'brown'}}>Email*</p>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -61,7 +61,7 @@ const Login = ({ closeModal, handleLogin }) => {
           {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
         </FormControl>
         <FormControl fullWidth>
-          <InputLabel>Password</InputLabel>
+        <p style={{color:'brown'}}>Password*</p>
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -69,10 +69,12 @@ const Login = ({ closeModal, handleLogin }) => {
             aria-describedby="password-helper-text"
           />
           {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
-        </FormControl>
-        <Button variant="contained" color="primary" onClick={handleLoginSubmit}>
+        </FormControl >
+        <FormControl style={{paddingLeft:'40%', marginTop:'40%'}}>
+        <Button   variant="contained" color="primary" onClick={handleLoginSubmit}>
           LOGIN
         </Button>
+        </FormControl>
       </CardContent>
     </div>
   );

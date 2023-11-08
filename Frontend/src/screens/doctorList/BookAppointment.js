@@ -18,16 +18,9 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     const [symptoms, setSymptoms] = useState('');
 
     const handleAppointmentBooking = () => {
-        const myHeaders = new Headers();
         const token = localStorage.getItem('token')
-        myHeaders.append(
-            'Authorization',
-            `${token}`
-        );
-        myHeaders.append('Content-Type', 'application/json');
-
         const raw = JSON.stringify({
-            doctorId: doctor.doctorId,
+            doctorId: doctor.id,
             doctorName: `${doctor.firstName} ${doctor.lastName}`,
             userId: 'test@gmasil.com',
             userName: 'fname',
@@ -41,15 +34,18 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
 
         const requestOptions = {
             method: 'POST',
-            headers: myHeaders,
+            headers:{
+                'Authorization': `${token}`,
+                'Content-Type': 'application/json',
+              },
             body: raw,
-            redirect: 'follow',
         };
-
+        console.log(requestOptions)
         try {
+            
             const response = fetch('/appointments', requestOptions);
-            const result = response.text();
-            console.log(result);
+            //const result = response.then((response) => response.json());
+            //console.log(result);
         } catch (error) {
             console.log('error', error);
         }
