@@ -26,43 +26,51 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     const myArray = text.split("@");
     let username = myArray[0];
 
+    
     const handleAppointmentBooking = () => {
-        setServerResponse('');
-        const token = localStorage.getItem('token')
-        const raw = JSON.stringify({
-            doctorId: doctor.id,
-            doctorName: `${doctor.firstName} ${doctor.lastName}`,
-            userId: decodedEmail,
-            userName: username,
-            userEmailId: decodedEmail,
-            timeSlot: selectedTimeSlot,
-            appointmentDate: selectedDate,
-            createdDate: '',
-            symptoms: symptoms,
-            priorMedicalHistory: medicalHistory,
-        });
+        if (!selectedTimeSlot) {
+            setServerResponse('Please select a time slot.');
+        }
+        else {
+            setServerResponse('');
+            const token = localStorage.getItem('token')
+            const raw = JSON.stringify({
+                doctorId: doctor.id,
+                doctorName: `${doctor.firstName} ${doctor.lastName}`,
+                userId: decodedEmail,
+                userName: username,
+                userEmailId: decodedEmail,
+                timeSlot: selectedTimeSlot,
+                appointmentDate: selectedDate,
+                createdDate: '',
+                symptoms: symptoms,
+                priorMedicalHistory: medicalHistory,
+            });
 
-        const requestOptions = {
-            method: 'POST',
-            headers:{
-                'Authorization': `${token}`,
-                'Content-Type': 'application/json',
-              },
-            body: raw,
-        };
-        setServerResponse('');
-        try {
-            
-            const response = fetch('/appointments', requestOptions);
-            const statusCode = response.status;
-            if (statusCode => 200 && statusCode < 300) {
-                setServerResponse('Appointment booked successfully');
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Authorization': `${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: raw,
+            };
+            setServerResponse('');
+            try {
+
+                const response = fetch('/appointments', requestOptions);
+                const statusCode = response.status;
+                if (statusCode => 200 && statusCode < 300) {
+                    // setServerResponse('Appointment booked successfully');
+                    window.alert('Appointment booked successfully');
+                }
+                else {
+                    // setServerResponse('Slot Already Booked');
+                    window.alert('Slot Already Booked');
+                }
+            } catch (error) {
+                console.log('error', error);
             }
-            else {
-                setServerResponse('Slot Already Booked');
-            }
-        } catch (error) {
-            console.log('error', error);
         }
     };
     if (!doctor) return null;
@@ -70,19 +78,19 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Card style={{ margin: '10% auto', width: '50%'}}>
+                <Card style={{ margin: '10% auto', width: '50%' }}>
                     <CardContent>
-                        <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} /> 
+                        <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
-                        <FormControl style={{paddingTop:'1%'}} fullWidth>
+                        <FormControl style={{ paddingTop: '1%' }} fullWidth>
                             Doctor's Name
-                            <TextField style={{width:'30%',alignItems:'left'}}value={`${doctor.firstName} ${doctor.lastName}`} disabled />
+                            <TextField style={{ width: '30%', alignItems: 'left' }} value={`${doctor.firstName} ${doctor.lastName}`} disabled />
                         </FormControl>
                         <FormControl fullWidth>
                             Select Date
                             <TextField
                                 type="date"
-                                style={{width:'30%',alignItems:'left'}}
+                                style={{ width: '30%', alignItems: 'left' }}
                                 value={selectedDate}
                                 InputLabelProps={{
                                     shrink: true,
@@ -93,7 +101,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                         <FormControl fullWidth>
                             Select Time Slot
                             <Select
-                                style={{width:'30%',alignItems:'left'}}
+                                style={{ width: '30%', alignItems: 'left' }}
                                 labelId="time-slot-label"
                                 id="time-slot"
                                 value={selectedTimeSlot}
@@ -117,11 +125,11 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth>
-                        Medical History
+                            Medical History
                             <TextField
                                 value={medicalHistory}
                                 onChange={(e) => setMedicalHistory(e.target.value)}
-                                style={{paddingTop:'10%', width:'30%',alignItems:'left'}}
+                                style={{ paddingTop: '10%', width: '30%', alignItems: 'left' }}
                             />
                         </FormControl>
                         <FormControl fullWidth>
@@ -129,10 +137,10 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                             <TextField
                                 value={symptoms}
                                 onChange={(e) => setSymptoms(e.target.value)}
-                                style={{paddingTop:'10%', width:'30%',alignItems:'left'}}
+                                style={{ paddingTop: '10%', width: '30%', alignItems: 'left' }}
                             />
                         </FormControl>
-                        <Button style={{marginTop:'5%'}} variant="contained" color="primary" onClick={handleAppointmentBooking}>
+                        <Button style={{ marginTop: '5%' }} variant="contained" color="primary" onClick={handleAppointmentBooking}>
                             BOOK APPOINTMENT
                         </Button>
                     </CardContent>
