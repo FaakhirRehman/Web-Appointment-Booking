@@ -16,8 +16,10 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
     const [medicalHistory, setMedicalHistory] = useState('');
     const [symptoms, setSymptoms] = useState('');
+    const [serverResponse, setServerResponse] = useState('');
 
     const handleAppointmentBooking = () => {
+        setServerResponse('');
         const token = localStorage.getItem('token')
         const raw = JSON.stringify({
             doctorId: doctor.id,
@@ -44,8 +46,13 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
         try {
             
             const response = fetch('/appointments', requestOptions);
-            //const result = response.then((response) => response.json());
-            //console.log(result);
+            const statusCode = response.status;
+            if (statusCode === 200) {
+                setServerResponse('Appointment booked successfully');
+            }
+            else {
+                setServerResponse('Slot Already Booked');
+            }
         } catch (error) {
             console.log('error', error);
         }
@@ -58,6 +65,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                 <Card style={{ margin: '10% auto', width: '50%', padding: '20px' }}>
                     <CardContent>
                         <h2>Book an Appointment</h2>
+                        {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
                         <FormControl fullWidth>
                             <TextField label="Doctor's Name" value={`${doctor.firstName} ${doctor.lastName}`} disabled />
                         </FormControl>

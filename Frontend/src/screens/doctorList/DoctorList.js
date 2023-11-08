@@ -98,7 +98,7 @@ const DoctorTab = () => {
         <div>           
             {doctors.map((doctor, index) => (
                 <Paper key={index} style={{ width: '600px', padding: '20px', margin: '20px' }}>
-                    <Typography variant="h5">{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
+                    <Typography>{`Doctor Name: ${doctor.firstName} ${doctor.lastName}`}</Typography>
                     <Typography>{`Speciality: ${doctor.speciality}`}</Typography>
                     <Typography>{`Rating: ${getStars(doctor.rating)}`}</Typography>
                     <Button
