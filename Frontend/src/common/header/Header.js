@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppBar, Toolbar, Button, Card, CardContent, Tab, Tabs } from "@material-ui/core";
 import Modal from "react-modal";
 import "./Header.css";
@@ -21,6 +21,11 @@ const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
+
+  useEffect(() => {
+  const loggedInStatus = !!localStorage.getItem('token');
+  setIsLoggedIn(loggedInStatus);
+  }, []);
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -35,6 +40,13 @@ const Header = () => {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    fetch(`/auth/logout`, requestOptions)
   };
 
   const handleTabChange = (event, newValue) => {

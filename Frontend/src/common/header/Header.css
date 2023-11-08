@@ -53,8 +53,10 @@
 
 .app-title {
   color: white;
+  font-family: 'Roboto';
+  font-weight: lighter;
   /* Color of the title */
-  font-size: 32px;
+  font-size: 28px;
   /* Size of the title */
   margin-top: auto;
   /* Vertically centers the image */
