@@ -17,6 +17,12 @@ const Register = ({ closeModal }) => {
   const [registrationError, setRegistrationError] = useState('');
 
   const handleRegister = () => {
+    setFirstNameError('');
+      setLastNameError('');
+      setEmailError('');
+      setPasswordError('');
+      setContactNumberError('');
+      setDateOfBirthError('');
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phonePattern = /^\d{10}$/;
 
