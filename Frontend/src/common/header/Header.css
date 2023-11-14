@@ -22,18 +22,14 @@
   display: flex;
   align-items: center;
   padding-left: 11px;
-  /* Padding to align the logo to the left */
 }
 
 .logo {
   height: 35px;
   float: left;
   display: block;
-  /* Ensures the height is respected */
   margin-top: auto;
-  /* Vertically centers the image */
   margin-bottom: auto;
-  /* Vertically centers the image */
 }
 
 .logoimg {
@@ -41,11 +37,8 @@
   height: 35px;
   float: left;
   display: block;
-  /* Ensures the height is respected */
   margin-top: auto;
-  /* Vertically centers the image */
   margin-bottom: auto;
-  /* Vertically centers the image */
 }
 
 .right-section {
@@ -55,20 +48,15 @@
 
 .login-btn {
   margin-right: 11px;
-  /* Adjust the margin between the button and the right edge */
 }
 
 .app-title {
   color: white;
   font-family: 'Roboto';
   font-weight: lighter;
-  /* Color of the title */
   font-size: 28px;
-  /* Size of the title */
   margin-top: auto;
-  /* Vertically centers the image */
   margin-bottom: auto;
-  /* Vertically centers the image */
   height: 35px;
   width: 500px;
   padding-left: 50px;

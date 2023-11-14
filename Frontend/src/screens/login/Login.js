@@ -1,4 +1,4 @@
-import { CardHeader, CardContent, FormControl, InputLabel, Input, Button } from '@material-ui/core';
+import { CardContent, FormControl, Input, Button } from '@material-ui/core';
 import React, { useState } from 'react';
 
 const Login = ({ closeModal, handleLogin }) => {
@@ -31,10 +31,9 @@ const Login = ({ closeModal, handleLogin }) => {
         .then((data) => {
           if (data.accessToken != null) {
             console.log(data.accessToken);
-            localStorage.setItem('token', `Bearer ${data.accessToken}`); // Storing the token with 'Bearer ' prefix
+            localStorage.setItem('token', `Bearer ${data.accessToken}`);
             const encodedEmail = email.replace('@', '_at_');
             localStorage.setItem('id', encodedEmail);
-            console.log(encodedEmail);
             closeModal();
             handleLogin();
           } else {
@@ -49,7 +48,7 @@ const Login = ({ closeModal, handleLogin }) => {
 
 return (
   <div>
-    <CardContent style={{width:'60%' ,paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
+    <CardContent style={{paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
     {invalidLoginError && <div style={{ color: 'red' }}>{invalidLoginError}</div>}
         <FormControl fullWidth>
         <p style={{color:'brown'}}>Email*</p>
