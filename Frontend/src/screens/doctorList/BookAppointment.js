@@ -58,6 +58,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
             try {
 
                 const response = fetch('/appointments', requestOptions);
+                const statusCode = response.status;
                 if (statusCode => 200 && statusCode < 300) {
                     // setServerResponse('Appointment booked successfully');
                     window.alert('Appointment booked successfully');
