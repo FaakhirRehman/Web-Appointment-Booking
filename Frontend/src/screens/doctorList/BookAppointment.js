@@ -55,21 +55,37 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
                 body: raw,
             };
             setServerResponse('');
-            try {
-
-                const response = fetch('/appointments', requestOptions);
-                const statusCode = response.status;
-                if (statusCode => 200 && statusCode < 300) {
-                    // setServerResponse('Appointment booked successfully');
+            fetch('/appointments', requestOptions)
+                .then(response => {
+                    if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                    }
+                    return response;
+                })
+                .then(data => {
                     window.alert('Appointment booked successfully');
-                }
-                else {
-                    // setServerResponse('Slot Already Booked');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     window.alert('Slot Already Booked');
-                }
-            } catch (error) {
-                console.log('error', error);
-            }
+                });
+        //     try {
+
+        //         const response = fetch('/appointments', requestOptions);
+        //         const statusCode = response.status;
+        //         console.log(statusCode);
+        //         if (statusCode => 200 && statusCode < 300) {
+        //             // setServerResponse('Appointment booked successfully');
+        //             window.alert('Appointment booked successfully');
+        //         }
+        //         else {
+        //             // setServerResponse('Slot Already Booked');
+        //             window.alert('Slot Already Booked');
+        //         }
+        //     } catch (error) {
+        //         console.log('error', error);
+        //         window.alert('Slot Already Booked');
+        //     }
         }
     };
     if (!doctor) return null;
@@ -77,7 +93,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Card style={{ margin: '10% auto', width: '50%' }}>
+                <Card style={{ margin: '10% auto', width: '50%', maxHeight: '80vh', overflowY: 'auto'  }}>
                     <CardContent>
                         <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
