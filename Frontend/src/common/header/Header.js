@@ -54,7 +54,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" className="app-bar">
+    <AppBar style={{backgroundColor:"purple"}} position="static" className="app-bar">
       <Toolbar className="toolbar">
         <div className="logo">
           <img src={logo} alt="Logo" className="logoimg" />

@@ -1,7 +1,14 @@
+.MuiAppBar-colorPrimary {
+  color: #fff;
+  background-color: #81007f;
+}
+
 .app-bar {
   background-color: #81007f;
+  color: #81007f;
   height: 70px;
 }
+
 
 .toolbar {
   display: flex;
