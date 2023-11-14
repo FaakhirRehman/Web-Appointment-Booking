@@ -18,23 +18,24 @@ const Register = ({ closeModal }) => {
 
   const handleRegister = () => {
     setFirstNameError('');
-      setLastNameError('');
-      setEmailError('');
-      setPasswordError('');
-      setContactNumberError('');
-      setDateOfBirthError('');
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phonePattern = /^\d{10}$/;
+    setLastNameError('');
+    setEmailError('');
+    setPasswordError('');
+    setContactNumberError('');
+    setDateOfBirthError('');
+
+    const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+    const phoneRegex = /^\d{10}$/;
 
     if (!firstName) {
       setFirstNameError('Enter First Name');
     } else if (!lastName) {
       setLastNameError('Enter Last Name');
-    } else if (!emailId || !emailPattern.test(emailId)) {
+    } else if (!emailId || !emailRegex.test(emailId)) {
       setEmailError('Enter Valid Email');
     } else if (!password) {
       setPasswordError('Enter Valid Password');
-    } else if (!mobile || !phonePattern.test(mobile)) {
+    } else if (!mobile || !phoneRegex.test(mobile)) {
       setContactNumberError('Enter 10-digit Contact Number');
     } else if (!dob) {
       setDateOfBirthError('Enter Date of Birth');
