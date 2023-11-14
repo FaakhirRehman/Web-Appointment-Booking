@@ -17,16 +17,19 @@ const Register = ({ closeModal }) => {
   const [registrationError, setRegistrationError] = useState('');
 
   const handleRegister = () => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^\d{10}$/;
+
     if (!firstName) {
       setFirstNameError('Enter First Name');
     } else if (!lastName) {
       setLastNameError('Enter Last Name');
-    } else if (!emailId) {
+    } else if (!emailId || !emailPattern.test(emailId)) {
       setEmailError('Enter Valid Email');
     } else if (!password) {
       setPasswordError('Enter Valid Password');
-    } else if (!mobile) {
-      setContactNumberError('Enter Contact Number');
+    } else if (!mobile || !phonePattern.test(mobile)) {
+      setContactNumberError('Enter 10-digit Contact Number');
     } else if (!dob) {
       setDateOfBirthError('Enter Date of Birth');
     } else {
@@ -41,12 +44,12 @@ const Register = ({ closeModal }) => {
       myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
-        "firstName":firstName,
-        "lastName":lastName,
-        "dob":dob,
-        "mobile":mobile,
-        "password":password,
-        "emailId":emailId
+        "firstName": firstName,
+        "lastName": lastName,
+        "dob": dob,
+        "mobile": mobile,
+        "password": password,
+        "emailId": emailId
       });
 
       var requestOptions = {
@@ -57,21 +60,21 @@ const Register = ({ closeModal }) => {
       };
       console.log(raw)
       fetch("/users/register", requestOptions)
-      .then(response => response.text())
-      .then((data) => {
-        if (data != null) {
-          closeModal();
-        } else {
-          setRegistrationError('Error registering. Please try again...');
-        }
-      })
-      .catch(error => console.log('error', error));
+        .then(response => response.text())
+        .then((data) => {
+          if (data != null) {
+            closeModal();
+          } else {
+            setRegistrationError('Error registering. Please try again...');
+          }
+        })
+        .catch(error => console.log('error', error));
     }
   };
 
   return (
     <div>
-      <CardContent style={{paddingLeft: '20%', paddingRight: '20%', paddingBottom:'20%' }}>
+      <CardContent style={{ paddingLeft: '20%', paddingRight: '20%', paddingBottom: '20%' }}>
         {registrationError && <div style={{ color: 'red' }}>{registrationError}</div>}
         <FormControl fullWidth>
           First Name
@@ -108,7 +111,7 @@ const Register = ({ closeModal }) => {
           {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
         </FormControl>
         <FormControl fullWidth>
-         Contact Number
+          Contact Number
           <Input
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
