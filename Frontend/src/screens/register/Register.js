@@ -24,7 +24,7 @@ const Register = ({ closeModal }) => {
     setContactNumberError('');
     setDateOfBirthError('');
 
-    const emailRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
     const phoneRegex = /^\d{10}$/;
 
     if (!firstName) {
