@@ -59,9 +59,7 @@ const Register = ({ closeModal }) => {
       fetch("/users/register", requestOptions)
       .then(response => response.text())
       .then((data) => {
-        //console.log(data);
         if (data != null) {
-          console.log(data);
           closeModal();
         } else {
           setRegistrationError('Error registering. Please try again...');

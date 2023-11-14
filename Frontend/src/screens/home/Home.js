@@ -3,7 +3,7 @@ import { Tabs, Tab } from '@material-ui/core';
 import DoctorList from '../doctorList/DoctorList';
 import Appointment from '../appointment/Appointment';
 import './Home.css';
-import Header from "../../common/header/Header"; // Import your Header component here
+import Header from "../../common/header/Header";
 const Home = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -13,7 +13,7 @@ const Home = () => {
 
   return (
     <div>
-        <Header /> {/* Include the Header component */}
+        <Header /> 
       <div>
       <Tabs value={selectedTab} onChange={handleTabChange} variant="fullWidth">
         <Tab label="DOCTORS" />
@@ -21,10 +21,10 @@ const Home = () => {
       </Tabs>
       </div>
       <div className='centered'>
-      {selectedTab === 0 && <DoctorList />} {/* Doctors go here */}
+      {selectedTab === 0 && <DoctorList />} 
       
       </div>
-      {selectedTab === 1 && <Appointment />} {/* apps go here*/}
+      {selectedTab === 1 && <Appointment />} 
       </div>
       
   );

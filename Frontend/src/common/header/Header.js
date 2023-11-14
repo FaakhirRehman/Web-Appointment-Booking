@@ -77,7 +77,6 @@ const Header = () => {
           <Card>
           <CardHeader title="Authentication" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
             <CardContent>
-              {/* Add your Authenticate Card Top Here */}
               <Tabs value={selectedTab} onChange={handleTabChange}>
                 <Tab label="LOGIN" />
                 <Tab label="REGISTER" />

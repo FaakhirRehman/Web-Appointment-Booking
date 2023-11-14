@@ -4,7 +4,6 @@ import {
     CardContent,
     TextField,
     FormControl,
-    InputLabel,
     Select,
     MenuItem,
     Button,
@@ -59,7 +58,6 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
             try {
 
                 const response = fetch('/appointments', requestOptions);
-                const statusCode = response.status;
                 if (statusCode => 200 && statusCode < 300) {
                     // setServerResponse('Appointment booked successfully');
                     window.alert('Appointment booked successfully');
@@ -78,7 +76,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Card style={{ margin: '10% auto', width: '50%', maxHeight: '80vh', overflowY: 'auto'  }}>
+                <Card style={{ margin: '10% auto', width: '50%' }}>
                     <CardContent>
                         <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}

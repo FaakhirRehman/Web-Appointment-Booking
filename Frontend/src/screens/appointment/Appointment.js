@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Paper from '@material-ui/core/Paper';
-import RateAppointment from './RateAppointment'; // Ensure the correct path to the RateAppointment file
+import RateAppointment from './RateAppointment'; 
 import {
   Button,
 } from '@material-ui/core';
@@ -35,9 +35,6 @@ const Appointment = () => {
         }
       
       };
-      console.log(token);
-      console.log(userName);
-      // Fetch appointments when userName is updated
       fetch(`/users/${userName}/appointments`, requestOptions)
         .then(response => {
           if (!response.ok) {
@@ -49,7 +46,7 @@ const Appointment = () => {
         .catch(error => console.error('Error fetching appointments:', error));
     }
     console.log(`/users/${userName}/appointments`);
-  }, [isLoggedIn, userName]); // Trigger the fetch when userName changes
+  }, [isLoggedIn, userName]);
 
 
   const handleCloseRateModal = () => {
