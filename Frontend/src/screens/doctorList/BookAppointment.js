@@ -78,7 +78,7 @@ const BookAppointment = ({ doctor, open, handleClose }) => {
     return (
         <div>
             <Modal open={open} onClose={handleClose}>
-                <Card style={{ margin: '10% auto', width: '50%', maxHeight: '80vh', overflowY: 'auto'  }}>
+                <Card style={{ margin: '10% auto', width: '50%' }}>
                     <CardContent>
                         <CardHeader title="Book an Appointment" style={{ backgroundColor: 'purple', height: '70px', color: 'white' }} />
                         {serverResponse && <div style={{ color: 'red' }}>{serverResponse}</div>}
